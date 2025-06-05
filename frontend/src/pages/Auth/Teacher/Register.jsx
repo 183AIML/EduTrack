@@ -8,6 +8,8 @@ import "../../../styles/form.css";
 const TeacherRegister = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
   const navigate = useNavigate();
 
   const handleRegister = (e) => {
@@ -26,9 +28,12 @@ const TeacherRegister = () => {
       <form onSubmit={handleRegister}>
         <EmailPasswordFields
           email={email}
-          password={password}
           setEmail={setEmail}
+          password={password}
           setPassword={setPassword}
+          confirmPassword={confirmPassword}
+          setConfirmPassword={setConfirmPassword}
+          showConfirmPassword={true}
         />
         <button type="submit">Login</button>
       </form>

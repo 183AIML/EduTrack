@@ -8,12 +8,15 @@ import "../../../styles/form.css";
 const StudentRegister = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
 
   const handleRegister = (e) => {
     e.preventDefault();
-    // TODO: Send to backend
-    alert(`Registering ${email}`);
+    if (password !== confirmPassword) {
+      alert("Passwords don't match");
+      return;
+    }
   };
 
   return (
@@ -26,9 +29,12 @@ const StudentRegister = () => {
       <form onSubmit={handleRegister}>
         <EmailPasswordFields
           email={email}
-          password={password}
           setEmail={setEmail}
+          password={password}
           setPassword={setPassword}
+          confirmPassword={confirmPassword}
+          setConfirmPassword={setConfirmPassword}
+          showConfirmPassword={true}
         />
         <button type="submit">Login</button>
       </form>
