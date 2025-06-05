@@ -13,10 +13,7 @@ const StudentRegister = () => {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      alert("Passwords don't match");
-      return;
-    }
+    alert(`Registering ${email}`);
   };
 
   return (
@@ -36,7 +33,7 @@ const StudentRegister = () => {
           setConfirmPassword={setConfirmPassword}
           showConfirmPassword={true}
         />
-        <button type="submit">Login</button>
+        <button type="submit">Register</button>
       </form>
     </div>
   );

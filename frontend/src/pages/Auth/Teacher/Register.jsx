@@ -35,7 +35,7 @@ const TeacherRegister = () => {
           setConfirmPassword={setConfirmPassword}
           showConfirmPassword={true}
         />
-        <button type="submit">Login</button>
+        <button type="submit">Register</button>
       </form>
     </div>
   );
