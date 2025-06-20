@@ -1,0 +1,102 @@
+/* ProfileDetails styles - Glassmorphism, creative section cards, animated section titles, theme-aware */
+
+.profile-details {
+  margin-top: 0rem;
+  margin-bottom: 2.5rem;
+  padding: 2.5rem 2.5rem;
+  background: var(--card-bg);
+  border-radius: 2rem;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+  width: 100%;
+  max-width: 800px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
+  position: relative;
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1.5px solid var(--primary);
+}
+body.dark .profile-details {
+  background: var(--card-bg-dark);
+  color: var(--text-dark);
+}
+.profile-section-card {
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 16px 0 rgba(0, 198, 251, 0.13);
+  padding: 2rem 2.2rem;
+  margin-bottom: 0rem;
+  position: relative;
+  overflow: hidden;
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1.5px solid var(--primary);
+  transition: background var(--transition), color var(--transition),
+    border var(--transition);
+}
+body.dark .profile-section-card {
+  background: rgba(34, 35, 37, 0.7);
+  border: 1.5px solid var(--accent);
+}
+.profile-section-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 1.2rem;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 1.2px;
+  animation: gradient-move 3s infinite linear alternate;
+}
+@keyframes gradient-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+.profile-section-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin-bottom: 1.2rem;
+}
+.profile-field-list {
+  font-size: 1.08rem;
+  color: var(--text);
+  margin-bottom: 0.1rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  padding: 0.5rem 0.2rem;
+  border-radius: 0.7rem;
+  background: rgba(0, 198, 251, 0.04);
+  transition: background var(--transition);
+}
+body.dark .profile-field-list {
+  color: var(--text-dark);
+  background: rgba(255, 106, 0, 0.07);
+}
+.profile-label-list {
+  font-weight: 700;
+  color: var(--primary-dark);
+  min-width: 140px;
+  letter-spacing: 0.5px;
+}
+body.dark .profile-label-list {
+  color: var(--accent);
+}
+.profile-value-list {
+  color: var(--text);
+  font-weight: 500;
+}
+body.dark .profile-value-list {
+  color: var(--text-dark);
+}
+.profile-value-muted {
+  color: #aaa;
+}

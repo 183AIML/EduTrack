@@ -1,0 +1,177 @@
+/*
+  GLOBAL THEME: ChatGPT Light Inspired
+  - Soft white backgrounds, subtle green accent, gentle borders, minimal shadow
+  - Clean, readable, modern, and minimal
+*/
+:root {
+  --primary: #10a37f;
+  --primary-dark: #0d7c5c;
+  --accent: #10a37f;
+  --background: #f7f8fa;
+  --card-bg: #fff;
+  --text: #22272a;
+  --border: #e3e6ea;
+  --error: #ef4444;
+  --success: #22c55e;
+  --transition: 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  background: var(--background);
+  color: var(--text);
+  min-height: 100vh;
+  transition: background var(--transition), color var(--transition);
+  background-attachment: fixed;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+
+html {
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+
+#root {
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 2rem 1rem;
+  background: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: 1.1rem;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.03);
+  padding: 2rem 1.5rem;
+  max-width: 420px;
+  width: 100%;
+  margin: 2rem auto;
+  border: 1px solid var(--border);
+  transition: background var(--transition), color var(--transition),
+    box-shadow var(--transition), border var(--transition);
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 700;
+  margin-bottom: 1.1rem;
+  letter-spacing: 0.5px;
+  color: var(--primary);
+  background: none;
+  -webkit-text-fill-color: unset;
+}
+
+input,
+select,
+textarea {
+  background: #f7f8fa;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 0.7rem;
+  padding: 0.7rem 1rem;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  outline: none;
+  box-shadow: none;
+  transition: border-color var(--transition), background var(--transition),
+    color var(--transition);
+}
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--primary);
+  background: #fff;
+}
+
+button {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  padding: 0.8rem 1.7rem;
+  margin-top: 0.5rem;
+  border-radius: 0.7rem;
+  box-shadow: 0 1px 4px 0 rgba(16, 163, 127, 0.08);
+  font-size: 1rem;
+  letter-spacing: 0.2px;
+  transition: background var(--transition), color var(--transition),
+    box-shadow var(--transition), transform var(--transition);
+  outline: 2px solid transparent;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+button:hover,
+button:focus {
+  background: var(--primary-dark);
+  box-shadow: 0 2px 8px 0 rgba(16, 163, 127, 0.16);
+  outline: 2px solid var(--primary-dark);
+  transform: translateY(-1px) scale(1.01);
+}
+button:active {
+  transform: scale(0.98);
+}
+
+.error {
+  color: var(--error);
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+.success {
+  color: var(--success);
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.dashboard-main {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 2rem 1.5rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+body::-webkit-scrollbar:horizontal,
+.app-container::-webkit-scrollbar:horizontal {
+  width: 0 !important;
+  display: none !important;
+}
+
+@media (max-width: 600px) {
+  .card {
+    padding: 1rem 0.3rem;
+    max-width: 98vw;
+  }
+  .app-container {
+    padding: 0.7rem 0.1rem;
+  }
+}
+@media (max-width: 900px) {
+  .dashboard-main {
+    padding: 1rem 0.2rem 1rem 0.2rem;
+  }
+}

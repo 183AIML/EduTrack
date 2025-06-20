@@ -1,0 +1,78 @@
+/*
+  TEACHER UPDATE FORM: Glassmorphism, creative, theme-aware
+*/
+.update-form {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+  padding: 2.5rem 2.5rem;
+  background: var(--card-bg);
+  border-radius: 2rem;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+  width: 100%;
+  max-width: 700px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1.5px solid var(--primary);
+  transition: background var(--transition), border var(--transition);
+}
+body.dark .update-form {
+  background: var(--card-bg-dark);
+  border: 1.5px solid var(--accent);
+}
+.update-form label {
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
+body.dark .update-form label {
+  color: var(--accent);
+}
+.update-form input {
+  width: 100%;
+  padding: 1.1rem 1.3rem;
+  border-radius: 1.2rem;
+  border: 1.5px solid var(--border);
+  font-size: 1.08rem;
+  margin-bottom: 1.2rem;
+  background: rgba(255, 255, 255, 0.7);
+  color: var(--text);
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.04);
+  transition: border-color var(--transition), background var(--transition),
+    color var(--transition);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+}
+body.dark .update-form input {
+  background: rgba(34, 35, 37, 0.7);
+  color: var(--text-dark);
+  border: 1.5px solid var(--border-dark);
+}
+.update-form button {
+  margin-top: 1.2rem;
+  width: 100%;
+  font-size: 1.1rem;
+  padding: 1.1rem 0;
+  border-radius: 1.2rem;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 4px 16px 0 rgba(0, 198, 251, 0.13);
+  transition: background var(--transition), color var(--transition),
+    box-shadow var(--transition), transform var(--transition);
+  outline: 2px solid transparent;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+.update-form button:hover {
+  background: linear-gradient(90deg, var(--accent), var(--primary));
+  box-shadow: 0 6px 24px 0 rgba(255, 106, 0, 0.18);
+  outline: 2px solid var(--primary-dark);
+  transform: translateY(-2px) scale(1.03);
+}

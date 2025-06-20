@@ -1,0 +1,206 @@
+/* Remove .personal-details-form as it is no longer used */
+/* .personal-details-form {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  max-width: unset;
+  margin: 0;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+} */
+
+/* ChatGPT Light Theme for Personal Details Card */
+.personal-details-card {
+  background: var(--card-bg);
+  border-radius: 1.1rem;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.03);
+  max-width: 400px;
+  width: 100%;
+  margin: 2.5rem auto;
+  padding: 1.5rem 1.2rem;
+  border: 1px solid var(--border);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.personal-details-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin-bottom: 1.1rem;
+}
+
+.personal-details-section:last-child {
+  margin-bottom: 0;
+}
+
+.personal-details-section h3 {
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  background: none;
+  -webkit-text-fill-color: unset;
+}
+
+.personal-details-card input,
+.personal-details-card select {
+  width: 100%;
+  padding: 0.9rem 1.1rem;
+  border-radius: 0.7rem;
+  border: 1.2px solid var(--border);
+  font-size: 1.01rem;
+  margin-bottom: 0.7rem;
+  background: #f7f8fa;
+  color: var(--text);
+  box-shadow: none;
+  transition: border-color var(--transition), background var(--transition),
+    color var(--transition);
+}
+
+.personal-details-card input:focus,
+.personal-details-card select:focus {
+  border-color: var(--primary);
+  background: #fff;
+}
+
+.personal-details-card button[type="submit"] {
+  margin-top: 1.1rem;
+  width: 100%;
+  font-size: 1.05rem;
+  padding: 1rem 0;
+  border-radius: 0.7rem;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 1px 4px 0 rgba(16, 163, 127, 0.08);
+  transition: background var(--transition), color var(--transition),
+    box-shadow var(--transition), transform var(--transition);
+  outline: 2px solid transparent;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.personal-details-card button[type="submit"]:hover {
+  background: var(--primary-dark);
+  box-shadow: 0 2px 8px 0 rgba(16, 163, 127, 0.16);
+  outline: 2px solid var(--primary-dark);
+  transform: translateY(-1px) scale(1.01);
+}
+
+/* Modern update form: visually distinct, no box-in-box effect, and more compact */
+.update-form-modern {
+  background: linear-gradient(120deg, #f7f8fa 60%, #eafaf4 100%);
+  border-radius: 1.2rem;
+  box-shadow: 0 4px 24px 0 rgba(16, 163, 127, 0.07);
+  border: none;
+  padding: 1.1rem 0.7rem 1.1rem 0.7rem;
+  max-width: 340px;
+  margin: 1.2rem auto;
+  position: relative;
+}
+
+.update-form-modern h2 {
+  color: var(--primary);
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  margin-bottom: 1.2rem;
+  background: none;
+}
+
+.modern-section {
+  background: transparent;
+  border-radius: 0.7rem;
+  box-shadow: none;
+  padding: 0.2rem 0 0.7rem 0;
+  margin-bottom: 1.1rem;
+  border: none;
+}
+
+.update-form-modern input,
+.update-form-modern select {
+  background: #f7f8fa;
+  border: 1.2px solid var(--border);
+  border-radius: 0.7rem;
+  font-size: 1.01rem;
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.7rem;
+  box-shadow: none;
+  color: var(--text);
+  transition: border-color var(--transition), background var(--transition);
+}
+
+.update-form-modern input:focus,
+.update-form-modern select:focus {
+  border-color: var(--primary);
+  background: #fff;
+}
+
+.update-form-modern button[type="submit"] {
+  margin-top: 1.1rem;
+  width: 100%;
+  font-size: 1.05rem;
+  padding: 1rem 0;
+  border-radius: 0.7rem;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 1px 4px 0 rgba(16, 163, 127, 0.08);
+  transition: background var(--transition), color var(--transition),
+    box-shadow var(--transition), transform var(--transition);
+  outline: 2px solid transparent;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.update-form-modern button[type="submit"]:hover {
+  background: var(--primary-dark);
+  box-shadow: 0 2px 8px 0 rgba(16, 163, 127, 0.16);
+  outline: 2px solid var(--primary-dark);
+  transform: translateY(-1px) scale(1.01);
+}
+
+.flex-align-center {
+  display: flex;
+  align-items: center;
+}
+.gap-12 {
+  gap: 1.2rem;
+}
+.gap-10 {
+  gap: 1rem;
+}
+.gap-3 {
+  gap: 0.3rem;
+}
+.mr7 {
+  margin-right: 0.7rem;
+}
+.mb0 {
+  margin-bottom: 0;
+}
+.mr3 {
+  margin-right: 0.3rem;
+}
+.required-asterisk {
+  color: red;
+}
+
+@media (max-width: 600px) {
+  .personal-details-card {
+    padding: 0.7rem 0.2rem;
+    max-width: 98vw;
+  }
+
+  .update-form-modern {
+    padding: 0.5rem 0.1rem;
+    max-width: 98vw;
+    margin: 0.5rem auto;
+  }
+}

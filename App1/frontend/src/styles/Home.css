@@ -1,0 +1,122 @@
+/*
+  HOME PAGE: Creative hero, animated gradient, glass card, bold call-to-action
+*/
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  background: none;
+}
+
+.home-hero {
+  font-size: 2.8rem;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+  letter-spacing: 2px;
+  animation: gradient-move 3s infinite linear alternate;
+}
+@keyframes gradient-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+.home-btn-group {
+  display: flex;
+  gap: 2.2rem;
+  margin-top: 2.5rem;
+  justify-content: center;
+}
+.home-btn-group button {
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 1.1rem 2.5rem;
+  border-radius: 1.5rem;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 16px 0 rgba(0, 198, 251, 0.13);
+  transition: background var(--transition), color var(--transition),
+    box-shadow var(--transition), transform var(--transition);
+  outline: 2px solid transparent;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+.home-btn-group button:hover {
+  background: linear-gradient(90deg, var(--accent), var(--primary));
+  box-shadow: 0 6px 24px 0 rgba(255, 106, 0, 0.18);
+  outline: 2px solid var(--primary-dark);
+  transform: translateY(-2px) scale(1.03);
+}
+
+@media (max-width: 600px) {
+  .home-hero {
+    font-size: 1.7rem;
+  }
+  .home-btn-group {
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+}
+
+.role-options {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 120px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 6px;
+  margin-top: 0px;
+}
+
+.dropdown-content button {
+  padding: 10px;
+  border: none;
+  width: 100%;
+  text-align: left;
+  background-color: white;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.dropdown-content button:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}

@@ -1,0 +1,149 @@
+/* STUDENT DASHBOARD: Glassmorphism, creative layout, theme-aware, floating main content */
+.dashboard-student-root {
+  display: flex;
+  flex-direction: row;
+  gap: 0.7rem;
+  margin-top: 5.2rem;
+  justify-content: flex-start;
+  align-items: flex-start;
+  min-height: 80vh;
+  width: 100%;
+}
+.dashboard-student-main {
+  flex: 1 1 0;
+  background: var(--card-bg);
+  border-radius: 2rem;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+  padding: 2rem 1.2rem;
+  min-width: 320px;
+  max-width: 900px;
+  margin: 0;
+  border: 1.5px solid var(--primary);
+  transition: background var(--transition), border var(--transition);
+  position: relative;
+  min-height: 300px;
+}
+body.dark .dashboard-student-main {
+  background: var(--card-bg-dark);
+  border: 1.5px solid var(--accent);
+}
+
+/* Error message styling */
+.error-message {
+  color: var(--error, #e74c3c);
+  background: #fff0f0;
+  border: 1px solid var(--error, #e74c3c);
+  border-radius: 0.5rem;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+/* Remove z-index and position from children to prevent overlaying */
+.dashboard-student-main > * {
+  position: static;
+  z-index: auto;
+  display: block;
+}
+
+/* Dashboard greeting card: standard alignment */
+.dashboard-greeting-main {
+  margin-top: 0rem !important;
+}
+
+/* Update details: move up and add subtle border/shadow for distinction */
+.dashboard-update-main {
+  margin-top: 0rem;
+  padding: 0.2rem 0.5rem;
+  box-shadow: 0 4px 18px 0 rgba(16, 163, 127, 0.08);
+  border: 1.5px solid var(--primary);
+  border-radius: 1.1rem;
+  background: linear-gradient(120deg, #f7f8fa 80%, #eafaf4 100%);
+}
+
+/* Change password: move up slightly for better alignment */
+.dashboard-password-main {
+  margin-top: 0rem !important;
+}
+
+/* Remove card-inside-card for update and password forms */
+.dashboard-update-main .personal-details-card.update-form-modern,
+.dashboard-password-main .personal-details-card.update-form-modern {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  max-width: 100%;
+}
+
+.dashboard-update-main .personal-details-section,
+.dashboard-password-main .personal-details-section {
+  background: #fff;
+  border-radius: 1.1rem;
+  box-shadow: 0 2px 8px 0 rgba(16, 163, 127, 0.07);
+  border: 1px solid var(--border);
+  padding: 0.2rem 0.2rem;
+  margin-bottom: 1.1rem;
+}
+
+.dashboard-update-main h2,
+.dashboard-password-main h2 {
+  margin-top: 0;
+}
+
+/* Remove card look from password form when inside dashboard-password-main */
+.dashboard-password-main .password-form {
+  background: none;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  max-width: 100%;
+}
+
+.dashboard-password-main .password-form input {
+  background: #fff;
+  border-radius: 0.7rem;
+  box-shadow: 0 2px 8px 0 rgba(16, 163, 127, 0.07);
+  border: 1px solid var(--border);
+  padding: 1.1rem 1.3rem;
+}
+
+.dashboard-password-main .password-form button {
+  margin-top: 1.2rem;
+  border-radius: 0.7rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .dashboard-student-root {
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 4.2rem;
+  }
+  .dashboard-student-main {
+    padding: 1rem 0.4rem;
+    min-width: 0;
+    max-width: 100vw;
+  }
+  .dashboard-greeting-main,
+  .dashboard-update-main,
+  .dashboard-password-main {
+    margin-top: 0.5rem;
+    padding: 0.7rem 0.2rem;
+    max-width: 98vw;
+  }
+}
+@media (max-width: 600px) {
+  .dashboard-student-root {
+    flex-direction: column;
+  }
+  .dashboard-student-main {
+    margin: 0.3rem 0.1rem;
+    padding: 0.5rem 0.1rem;
+    border-radius: 0.7rem;
+    max-width: 100vw;
+  }
+}
