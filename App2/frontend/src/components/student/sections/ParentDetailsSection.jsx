@@ -5,6 +5,7 @@ import PhoneIcon from "@mui/icons-material/Phone";
 
 const ParentDetailsSection = ({ formData, handleChange, fieldErrors }) => (
   <>
+    <div className="section-title"> Parent Details:</div>
     <TextField
       label="Father's Name"
       name="fatherName"

@@ -50,3 +50,13 @@ export async function login({ email, password }) {
   if (!res.ok) throw new Error(await res.text());
   return await res.json();
 }
+
+export async function checkAadhaarExists(aadhaar) {
+  const res = await fetch(
+    `http://localhost:8080/api/register/check-aadhaar?aadhaar=${encodeURIComponent(
+      aadhaar
+    )}`
+  );
+  if (!res.ok) throw new Error(await res.text());
+  return await res.json();
+}

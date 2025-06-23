@@ -3,9 +3,76 @@ import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import HomeIcon from "@mui/icons-material/Home";
 import LocationCityIcon from "@mui/icons-material/LocationCity";
+import MenuItem from "@mui/material/MenuItem";
+
+const districts = [
+  "Bagalkote",
+  "Ballari (Bellary)",
+  "Belagavi (Belgaum)",
+  "Bengaluru Rural",
+  "Bengaluru Urban",
+  "Bidar",
+  "Chamarajanagar",
+  "Chikkaballapur",
+  "Chikkamagaluru (Chikmagalur)",
+  "Chitradurga",
+  "Dakshina Kannada (Mangaluru)",
+  "Davanagere",
+  "Dharwad",
+  "Gadag",
+  "Hassan",
+  "Haveri",
+  "Kalaburagi (Gulbarga)",
+  "Kodagu (Coorg)",
+  "Kolar",
+  "Koppal",
+  "Mandya",
+  "Mysuru (Mysore)",
+  "Raichur",
+  "Ramanagara",
+  "Shivamogga (Shimoga)",
+  "Tumakuru (Tumkur)",
+  "Udupi",
+  "Uttara Kannada (Karwar)",
+  "Vijayapura (Bijapur)",
+  "Yadgir",
+  "Vijayanagara (recently carved out from Ballari)",
+];
+
+const states = [
+  "Andhra Pradesh",
+  "Arunachal Pradesh",
+  "Assam",
+  "Bihar",
+  "Chhattisgarh",
+  "Goa",
+  "Gujarat",
+  "Haryana",
+  "Himachal Pradesh",
+  "Jharkhand",
+  "Karnataka",
+  "Kerala",
+  "Madhya Pradesh",
+  "Maharashtra",
+  "Manipur",
+  "Meghalaya",
+  "Mizoram",
+  "Nagaland",
+  "Odisha",
+  "Punjab",
+  "Rajasthan",
+  "Sikkim",
+  "Tamil Nadu",
+  "Telangana",
+  "Tripura",
+  "Uttar Pradesh",
+  "Uttarakhand",
+  "West Bengal",
+];
 
 const AddressSection = ({ formData, handleChange, fieldErrors }) => (
   <>
+    <div className="section-title"> Address:</div>
     <TextField
       label="Address Line"
       name="address"
@@ -63,10 +130,18 @@ const AddressSection = ({ formData, handleChange, fieldErrors }) => (
         onChange={handleChange}
         required
         margin="normal"
+        select
         error={!!fieldErrors.district}
         helperText={fieldErrors.district}
         className="half-width"
-      />
+      >
+        <MenuItem value="">Select</MenuItem>
+        {districts.map((d) => (
+          <MenuItem key={d} value={d}>
+            {d}
+          </MenuItem>
+        ))}
+      </TextField>
       <TextField
         label="State"
         name="state"
@@ -74,10 +149,18 @@ const AddressSection = ({ formData, handleChange, fieldErrors }) => (
         onChange={handleChange}
         required
         margin="normal"
+        select
         error={!!fieldErrors.state}
         helperText={fieldErrors.state}
         className="half-width"
-      />
+      >
+        <MenuItem value="">Select</MenuItem>
+        {states.map((s) => (
+          <MenuItem key={s} value={s}>
+            {s}
+          </MenuItem>
+        ))}
+      </TextField>
     </div>
   </>
 );

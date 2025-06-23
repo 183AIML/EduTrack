@@ -78,5 +78,16 @@
 .dob-picker .MuiInputBase-root {
   height: 56px;
   box-sizing: border-box;
-   /* Nudge down for perfect alignment */
+  /* Nudge down for perfect alignment */
+}
+
+.section-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #2193b0;
+  margin-bottom: 0.5rem;
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }

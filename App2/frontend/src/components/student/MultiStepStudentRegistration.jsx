@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Alert from "@mui/material/Alert";
 import SectionForm from "./SectionForm";
-import { registerStudent } from "../../services/api";
+import { registerStudent, checkAadhaarExists } from "../../services/api";
 import "../../styles/registration.css";
 
 const initialFormData = {
@@ -99,13 +99,64 @@ const MultiStepStudentRegistration = ({ userInfo }) => {
         newErrors[field] = "Required";
       }
     });
+    // Custom validation for Personal Details step
+    if (activeStep === 0) {
+      // DOB: min age 15
+      if (formData.dob) {
+        let dobDate;
+        if (typeof formData.dob === "string") {
+          dobDate = new Date(formData.dob);
+        } else if (formData.dob instanceof Date) {
+          dobDate = formData.dob;
+        } else {
+          dobDate = new Date(String(formData.dob));
+        }
+        if (!isNaN(dobDate)) {
+          const today = new Date();
+          const minDate = new Date(
+            today.getFullYear() - 15,
+            today.getMonth(),
+            today.getDate()
+          );
+          if (dobDate > minDate) {
+            newErrors.dob = "You must be at least 15 years old.";
+          }
+        } else {
+          newErrors.dob = "Invalid date.";
+        }
+      }
+      // Phone: 10 digits
+      if (formData.phoneNumber && !/^\d{10}$/.test(formData.phoneNumber)) {
+        newErrors.phoneNumber = "Mobile number must be exactly 10 digits.";
+      }
+      // Aadhaar: 12 digits
+      if (formData.aadhaar && !/^\d{12}$/.test(formData.aadhaar)) {
+        newErrors.aadhaar = "Aadhaar number must be exactly 12 digits.";
+      }
+    }
     setFieldErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     setError("");
     if (!validateStep()) return;
+    // Aadhaar uniqueness check before moving to Address step
+    if (activeStep === 0 && formData.aadhaar) {
+      try {
+        const res = await checkAadhaarExists(formData.aadhaar);
+        if (res.exists) {
+          setFieldErrors((prev) => ({
+            ...prev,
+            aadhaar: "Aadhaar number already exists.",
+          }));
+          return;
+        }
+      } catch (err) {
+        setError("Error checking Aadhaar. Please try again.");
+        return;
+      }
+    }
     setAnimating(true);
     setTimeout(() => {
       setActiveStep((prev) => prev + 1);
@@ -122,8 +173,17 @@ const MultiStepStudentRegistration = ({ userInfo }) => {
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-    setFieldErrors((prev) => ({ ...prev, [name]: undefined }));
+    if (name === "year") {
+      setFormData((prev) => ({ ...prev, year: value, semester: "" }));
+      setFieldErrors((prev) => ({
+        ...prev,
+        year: undefined,
+        semester: undefined,
+      }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+      setFieldErrors((prev) => ({ ...prev, [name]: undefined }));
+    }
   };
   const handleSubmit = async (e) => {
     e.preventDefault();

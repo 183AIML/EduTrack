@@ -18,4 +18,8 @@ public class StudentService {
     public Student findByUser(User user) {
         return studentRepository.findAll().stream().filter(s -> s.getUser().getId().equals(user.getId())).findFirst().orElse(null);
     }
+
+    public boolean aadhaarExists(String aadhaar) {
+        return studentRepository.findByAadhaar(aadhaar).isPresent();
+    }
 }

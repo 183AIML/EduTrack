@@ -11,6 +11,7 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
 const PersonalDetailsSection = ({ formData, handleChange, fieldErrors }) => (
   <>
+    <div className="section-title"> Personal Details:</div>
     <TextField
       label="Full Name"
       name="fullName"
@@ -37,17 +38,16 @@ const PersonalDetailsSection = ({ formData, handleChange, fieldErrors }) => (
           onChange={(date) =>
             handleChange({ target: { name: "dob", value: date } })
           }
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              name="dob"
-              required
-              margin="normal"
-              error={!!fieldErrors.dob}
-              helperText={fieldErrors.dob}
-              className="half-width dob-picker"
-            />
-          )}
+          slotProps={{
+            textField: {
+              name: "dob",
+              required: true,
+              margin: "normal",
+              error: !!fieldErrors.dob,
+              helperText: fieldErrors.dob,
+              className: "half-width dob-picker",
+            },
+          }}
         />
       </LocalizationProvider>
       <TextField

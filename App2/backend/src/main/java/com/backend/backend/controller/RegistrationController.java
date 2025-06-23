@@ -100,4 +100,10 @@ public class RegistrationController {
         boolean exists = userService.emailExists(email);
         return ResponseEntity.ok(Map.of("exists", exists));
     }
+
+    @GetMapping("/check-aadhaar")
+    public ResponseEntity<?> checkAadhaarExists(@RequestParam String aadhaar) {
+        boolean exists = studentService.aadhaarExists(aadhaar);
+        return ResponseEntity.ok(Map.of("exists", exists));
+    }
 }
