@@ -38,7 +38,7 @@ export default function Home() {
             marginBottom: 24,
           }}
         >
-          EduTract Portal
+          EduTrack Portal
         </h1>
         <Button
           variant="contained"

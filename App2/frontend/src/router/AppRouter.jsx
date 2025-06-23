@@ -5,11 +5,17 @@ import TeacherRegisterPage from "../pages/TeacherRegisterPage";
 import LoginPage from "../pages/LoginPage";
 import DashboardPage from "../pages/DashboardPage";
 import ProfilePage from "../pages/ProfilePage";
-import UpdateDetailsPage from "../pages/UpdateDetailsPage";
 import ChangePasswordPage from "../pages/ChangePasswordPage";
 import ViewStudentsPage from "../pages/ViewStudentsPage";
 import AdminPanelPage from "../pages/AdminPanelPage";
 import RegisterPage from "../pages/RegisterPage";
+import StudentDashboard from "../features/dashboard/StudentDashboard";
+import TeacherDashboard from "../features/dashboard/TeacherDashboard";
+import AcademicPerformance from "../features/dashboard/AcademicPerformance";
+import Attendance from "../features/dashboard/Attendance";
+import Assignment from "../features/dashboard/Assignment";
+import Trainings from "../features/dashboard/Trainings";
+import Achievements from "../features/dashboard/Achievements";
 
 export default function AppRouter() {
   const isLoggedIn = Boolean(localStorage.getItem("edutract_token"));
@@ -23,16 +29,35 @@ export default function AppRouter() {
       <Route path="/register/teacher" element={<TeacherRegisterPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route
-        path="/dashboard"
-        element={isLoggedIn ? <DashboardPage /> : <Navigate to="/login" />}
+        path="/dashboard/student/*"
+        element={
+          isLoggedIn && role === "student" ? (
+            <StudentDashboard />
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
+      >
+        <Route path="profile" element={<ProfilePage />} />
+        <Route path="academic-performance" element={<AcademicPerformance />} />
+        <Route path="attendance" element={<Attendance />} />
+        <Route path="assignment" element={<Assignment />} />
+        <Route path="trainings" element={<Trainings />} />
+        <Route path="achievements" element={<Achievements />} />
+      </Route>
+      <Route
+        path="/dashboard/teacher/*"
+        element={
+          isLoggedIn && role === "teacher" ? (
+            <TeacherDashboard />
+          ) : (
+            <Navigate to="/login" />
+          )
+        }
       />
       <Route
         path="/profile"
         element={isLoggedIn ? <ProfilePage /> : <Navigate to="/login" />}
-      />
-      <Route
-        path="/update"
-        element={isLoggedIn ? <UpdateDetailsPage /> : <Navigate to="/login" />}
       />
       <Route
         path="/change-password"

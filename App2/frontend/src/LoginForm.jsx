@@ -25,11 +25,13 @@ export default function LoginForm({ onLogin }) {
       // Save token and role to localStorage
       localStorage.setItem("edutract_token", result.token);
       localStorage.setItem("edutract_role", result.role);
+      localStorage.setItem("edutract_email", email);
       if (onLogin) onLogin({ email, role: result.role });
       // Role-based dashboard redirect
       if (result.role === "admin") window.location.href = "/dashboard";
-      else if (result.role === "teacher") window.location.href = "/dashboard";
-      else window.location.href = "/dashboard";
+      else if (result.role === "teacher")
+        window.location.href = "/dashboard/teacher";
+      else window.location.href = "/dashboard/student";
     } catch (err) {
       setError(err.message || "Login failed");
     } finally {

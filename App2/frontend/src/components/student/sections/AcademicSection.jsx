@@ -1,7 +1,7 @@
 import React from "react";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
-
+ 
 const semesters = ["1", "2", "3", "4", "5", "6"];
 const years = ["1", "2", "3"];
 const religions = ["Hindu", "Muslim", "Christian", "Other"];

@@ -1,8 +1,6 @@
 .app-main {
   min-height: calc(100vh - 72px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: block;
   background: none;
-  padding: 2rem 0;
+
 }
