@@ -10,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.Map;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @RestController
 @RequestMapping("/api/register")
-@CrossOrigin(origins = {"http://localhost:5173", "http://192.168.250.25:5173"})
+@CrossOrigin(origins = { "http://localhost:5173", "http://192.168.250.25:5173" })
 public class RegistrationController {
     @Autowired
     private UserService userService;
@@ -37,11 +39,21 @@ public class RegistrationController {
     @PostMapping("/student")
     public ResponseEntity<?> registerStudent(@RequestBody Map<String, Object> payload) {
         Long userId = Long.valueOf(payload.get("userId").toString());
-        // Map payload fields to Student entity
         Student student = new Student();
-        User user = new User(); user.setId(userId); student.setUser(user);
+        User user = new User();
+        user.setId(userId);
+        student.setUser(user);
         student.setFullName((String) payload.get("fullName"));
-        student.setDob((String) payload.get("dob"));
+        // Parse and store only yyyy-MM-dd for dob
+        String dobRaw = (String) payload.get("dob");
+        if (dobRaw != null && !dobRaw.isEmpty()) {
+            try {
+                LocalDate dob = LocalDate.parse(dobRaw.substring(0, 10));
+                student.setDob(dob.toString()); // yyyy-MM-dd
+            } catch (Exception e) {
+                student.setDob(dobRaw); // fallback
+            }
+        }
         student.setGender((String) payload.get("gender"));
         student.setPhoneNumber((String) payload.get("phoneNumber"));
         student.setSecondaryEmail((String) payload.get("secondaryEmail"));
@@ -76,22 +88,31 @@ public class RegistrationController {
     public ResponseEntity<?> registerTeacher(@RequestBody Map<String, Object> payload) {
         Long userId = Long.valueOf(payload.get("userId").toString());
         Teacher teacher = new Teacher();
-        User user = new User(); user.setId(userId); teacher.setUser(user);
+        User user = new User();
+        user.setId(userId);
+        teacher.setUser(user);
         teacher.setFullName((String) payload.get("fullName"));
-        teacher.setDob((String) payload.get("dob"));
-        teacher.setGender((String) payload.get("gender"));
+        teacher.setEmployeeId((String) payload.get("employeeId"));
         teacher.setPhoneNumber((String) payload.get("phoneNumber"));
-        teacher.setDepartment((String) payload.get("department"));
+        teacher.setGender((String) payload.get("gender"));
         teacher.setQualification((String) payload.get("qualification"));
-        if (payload.get("experience") != null) {
+        teacher.setDesignation((String) payload.get("designation"));
+        teacher.setDepartment((String) payload.get("department"));
+        // Parse and store only yyyy-MM-dd for dateOfJoining
+        String dojRaw = (String) payload.get("dateOfJoining");
+        if (dojRaw != null && !dojRaw.isEmpty()) {
             try {
-                teacher.setExperienceYears(Integer.valueOf(payload.get("experience").toString()));
+                LocalDate doj = LocalDate.parse(dojRaw.substring(0, 10));
+                teacher.setDateOfJoining(doj.toString()); // yyyy-MM-dd
             } catch (Exception e) {
-                teacher.setExperienceYears(0);
+                teacher.setDateOfJoining(dojRaw); // fallback
             }
         }
-        // Add more fields as needed
-        teacherService.registerTeacher(teacher);
+        try {
+            teacherService.registerTeacher(teacher);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
         return ResponseEntity.ok("Teacher registration successful");
     }
 
@@ -104,6 +125,12 @@ public class RegistrationController {
     @GetMapping("/check-aadhaar")
     public ResponseEntity<?> checkAadhaarExists(@RequestParam String aadhaar) {
         boolean exists = studentService.aadhaarExists(aadhaar);
+        return ResponseEntity.ok(Map.of("exists", exists));
+    }
+
+    @GetMapping("/check-employee-id")
+    public ResponseEntity<?> checkEmployeeIdExists(@RequestParam String employeeId) {
+        boolean exists = teacherService.employeeIdExists(employeeId);
         return ResponseEntity.ok(Map.of("exists", exists));
     }
 }

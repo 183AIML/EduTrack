@@ -7,7 +7,7 @@ const sectionOrder = [
     title: "Personal Details",
     fields: [
       { label: "Full Name", key: "name" },
-      { label: "Date of Birth", key: "dob" },
+      { label: "Date of Birth", key: "dob", isDate: true },
       { label: "Gender", key: "gender" },
       { label: "Phone Number", key: "phoneNumber" },
       { label: "Secondary Email", key: "secondaryEmail" },
@@ -91,11 +91,13 @@ export default function StudentProfileCards() {
         <div className="profile-section-card" key={section.title}>
           <div className="profile-section-title">{section.title}</div>
           <div className="profile-section-fields">
-            {section.fields.map(({ label, key }) => (
+            {section.fields.map(({ label, key, isDate }) => (
               <div className="profile-field-row" key={key}>
                 <span className="profile-field-label">{label}:</span>
                 <span className="profile-field-value">
-                  {student[key] || "-"}
+                  {isDate && student[key]
+                    ? new Date(student[key]).toISOString().slice(0, 10)
+                    : student[key] || "-"}
                 </span>
               </div>
             ))}

@@ -16,11 +16,13 @@ public class Teacher {
     private User user;
 
     private String fullName;
-    private String dob;
-    private String gender;
+    @Column(unique = true, nullable = false, length = 7)
+    private String employeeId;
     private String phoneNumber;
-    private String department;
+    private String gender;
     private String qualification;
-    private Integer experienceYears;
-    // Add more fields as needed
+    private String designation;
+    private String department;
+    @Column(name = "date_of_joining", length = 10)
+    private String dateOfJoining; // dd/mm/yyyy
 }

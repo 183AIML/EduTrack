@@ -16,6 +16,14 @@ import Attendance from "../features/dashboard/Attendance";
 import Assignment from "../features/dashboard/Assignment";
 import Trainings from "../features/dashboard/Trainings";
 import Achievements from "../features/dashboard/Achievements";
+import TeacherProfilePage from "../pages/TeacherProfilePage";
+import TeacherCoursePage from "../pages/TeacherCoursePage";
+import TeacherAssignmentPage from "../pages/TeacherAssignmentPage";
+import TeacherAttendancePage from "../pages/TeacherAttendancePage";
+import TeacherAssessmentPage from "../pages/TeacherAssessmentPage";
+import TeacherPerformanceMonitoringPage from "../pages/TeacherPerformanceMonitoringPage";
+import TeacherReportsPage from "../pages/TeacherReportsPage";
+import TeacherCommunicationPage from "../pages/TeacherCommunicationPage";
 
 export default function AppRouter() {
   const isLoggedIn = Boolean(localStorage.getItem("edutract_token"));
@@ -54,7 +62,19 @@ export default function AppRouter() {
             <Navigate to="/login" />
           )
         }
-      />
+      >
+        <Route path="profile" element={<TeacherProfilePage />} />
+        <Route path="course" element={<TeacherCoursePage />} />
+        <Route path="assignment" element={<TeacherAssignmentPage />} />
+        <Route path="attendance" element={<TeacherAttendancePage />} />
+        <Route path="assessment" element={<TeacherAssessmentPage />} />
+        <Route
+          path="performance-monitoring"
+          element={<TeacherPerformanceMonitoringPage />}
+        />
+        <Route path="reports" element={<TeacherReportsPage />} />
+        <Route path="communication" element={<TeacherCommunicationPage />} />
+      </Route>
       <Route
         path="/profile"
         element={isLoggedIn ? <ProfilePage /> : <Navigate to="/login" />}

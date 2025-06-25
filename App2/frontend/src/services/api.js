@@ -1,8 +1,14 @@
 // Placeholder for api service
 export const api = {};
 
+// Set your backend IP here. Use your system's local IP address so other devices on the same WiFi can access it.
+const API_BASE_URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:8080"
+    : `http://${window.location.hostname}:8080`;
+
 export async function registerUser({ email, password, role }) {
-  const res = await fetch("http://192.168.250.25:8080/api/register/user", {
+  const res = await fetch(`${API_BASE_URL}/api/register/user`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password, role }),
@@ -12,7 +18,7 @@ export async function registerUser({ email, password, role }) {
 }
 
 export async function registerStudent(studentData) {
-  const res = await fetch("http://192.168.250.25:8080/api/register/student", {
+  const res = await fetch(`${API_BASE_URL}/api/register/student`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(studentData),
@@ -22,7 +28,7 @@ export async function registerStudent(studentData) {
 }
 
 export async function registerTeacher(teacherData) {
-  const res = await fetch("http://192.168.250.25:8080/api/register/teacher", {
+  const res = await fetch(`${API_BASE_URL}/api/register/teacher`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(teacherData),
@@ -33,7 +39,7 @@ export async function registerTeacher(teacherData) {
 
 export async function checkEmailExists(email) {
   const res = await fetch(
-    `http://192.168.250.25:8080/api/register/check-email?email=${encodeURIComponent(
+    `${API_BASE_URL}/api/register/check-email?email=${encodeURIComponent(
       email
     )}`
   );
@@ -42,7 +48,7 @@ export async function checkEmailExists(email) {
 }
 
 export async function login({ email, password }) {
-  const res = await fetch("http://192.168.250.25:8080/api/auth/login", {
+  const res = await fetch(`${API_BASE_URL}/api/auth/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
@@ -53,8 +59,18 @@ export async function login({ email, password }) {
 
 export async function checkAadhaarExists(aadhaar) {
   const res = await fetch(
-    `http://192.168.250.25:8080/api/register/check-aadhaar?aadhaar=${encodeURIComponent(
+    `${API_BASE_URL}/api/register/check-aadhaar?aadhaar=${encodeURIComponent(
       aadhaar
+    )}`
+  );
+  if (!res.ok) throw new Error(await res.text());
+  return await res.json();
+}
+
+export async function checkEmployeeIdExists(employeeId) {
+  const res = await fetch(
+    `${API_BASE_URL}/api/register/check-employee-id?employeeId=${encodeURIComponent(
+      employeeId
     )}`
   );
   if (!res.ok) throw new Error(await res.text());

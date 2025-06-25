@@ -98,7 +98,7 @@ function Navbar() {
         <Box className="navbar-brand">
           <SchoolIcon sx={{ fontSize: 36, color: "#2193b0" }} />
           <Typography variant="h5" className="navbar-title">
-            EduTract
+            EduTrack
           </Typography>
         </Box>
         <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>

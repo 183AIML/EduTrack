@@ -193,12 +193,12 @@ const MultiStepStudentRegistration = ({ userInfo }) => {
     setLoading(true);
     try {
       // Register user first
-      const { email, password, role } = formData;
+      const { email, password, role, ...rest } = formData;
       const userRes = await import("../../services/api").then((api) =>
         api.registerUser({ email, password, role })
       );
       // Register student with userId
-      await registerStudent({ ...formData, userId: userRes.userId });
+      await registerStudent({ ...rest, userId: userRes.userId });
       sessionStorage.removeItem("register_email");
       sessionStorage.removeItem("register_password");
       sessionStorage.removeItem("register_role");
