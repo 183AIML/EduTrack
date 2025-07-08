@@ -9,6 +9,10 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Box from "@mui/material/Box";
 import Alert from "@mui/material/Alert";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { checkEmailExists } from "../services/api";
 import "../styles/registration.css";
 
@@ -17,6 +21,8 @@ const RegisterPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -28,8 +34,14 @@ const RegisterPage = () => {
     if (!email) return setError("Email is required.");
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email))
       return setError("Invalid email format.");
-    if (!password || password.length < 6)
-      return setError("Password must be at least 6 characters.");
+    // Password validation: min 8, upper, lower, number, special char
+    const passwordPolicy =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/;
+    if (!passwordPolicy.test(password)) {
+      return setError(
+        "Password must be at least 8 characters and include uppercase, lowercase, number, and special character."
+      );
+    }
     if (password !== confirmPassword)
       return setError("Passwords do not match.");
     if (role === "admin") return setError("Admin registration is disabled.");
@@ -100,21 +112,50 @@ const RegisterPage = () => {
       />
       <TextField
         label="Password"
-        type="password"
+        type={showPassword ? "text" : "password"}
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         fullWidth
         required
         margin="normal"
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={() => setShowPassword((show) => !show)}
+                edge="end"
+              >
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+        helperText={
+          "Password must be at least 8 characters and include uppercase, lowercase, number, and special character."
+        }
       />
       <TextField
         label="Confirm Password"
-        type="password"
+        type={showConfirmPassword ? "text" : "password"}
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
         fullWidth
         required
         margin="normal"
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle confirm password visibility"
+                onClick={() => setShowConfirmPassword((show) => !show)}
+                edge="end"
+              >
+                {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
       />
       <Button
         variant="contained"
