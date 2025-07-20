@@ -46,6 +46,28 @@ const ParentDetailsSection = ({ formData, handleChange, fieldErrors }) => (
       error={!!fieldErrors.parentMobile}
       helperText={fieldErrors.parentMobile}
     />
+    <div style={{ marginTop: 24 }}>
+      <label
+        htmlFor="profileImage"
+        className="section-title"
+        style={{ marginBottom: 0 }}
+      >
+        Profile Image (JPEG/PNG, max 50 KB):
+      </label>
+      <input
+        type="file"
+        id="profileImage"
+        name="profileImage"
+        accept="image/jpeg, image/png"
+        onChange={handleChange}
+        style={{ marginLeft: 12 }}
+      />
+      {fieldErrors.profileImage && (
+        <span style={{ color: "red", fontSize: "0.9em", marginLeft: 8 }}>
+          {fieldErrors.profileImage}
+        </span>
+      )}
+    </div>
   </>
 );
 

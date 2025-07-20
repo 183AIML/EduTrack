@@ -1,3 +1,17 @@
+.student-topbar-image-container {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+ 
+  min-width: 110px;
+  min-height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border-radius: 10px;
+}
+
 /* Student Dashboard - Custom Standalone CSS */
 .student-dashboard-container {
   display: flex;
@@ -89,14 +103,15 @@
 
 .student-dashboard-topbar.student-dashboard-topbar-lines {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-direction: row;
+  align-items: center;
   justify-content: flex-start;
+  position: relative;
   height: 120px;
   min-height: 40px;
   width: 100%;
   background: linear-gradient(90deg, #2193b0 0%, #6dd5ed 100%);
-  border-radius: 10px;
+  border-radius: 5px;
   margin-bottom: 18px;
   box-shadow: 0 2px 8px 0 rgba(33, 147, 176, 0.08);
   padding: 12px 24px;
@@ -145,4 +160,14 @@
   flex-direction: column;
   min-width: 0;
   padding: 0 18px;
+}
+
+.student-topbar-profile-image {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border: 2px solid #fff;
+  background: #000000;
+  display: block;
+  border-radius: 10px;
 }

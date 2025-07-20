@@ -2,10 +2,11 @@
 export const api = {};
 
 // Set your backend IP here. Use your system's local IP address so other devices on the same WiFi can access it.
+// Use localhost for local dev, otherwise use current hostname (for LAN access)
 const API_BASE_URL =
   window.location.hostname === "localhost"
-    ? "http://10.91.66.25:8080"
-    : `http://10.91.66.25:8080`;
+    ? "http://localhost:8080"
+    : `http://${window.location.hostname}:8080`;
 
 export async function registerUser({ email, password, role }) {
   const res = await fetch(`${API_BASE_URL}/api/register/user`, {

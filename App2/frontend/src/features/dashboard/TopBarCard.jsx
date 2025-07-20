@@ -44,14 +44,23 @@ export default function TopBarCard() {
 
   return (
     <div className="student-dashboard-topbar student-dashboard-topbar-lines">
-      <div className="student-topbar-line">Welcome</div>
-      <div className="student-topbar-line">{student.name}</div>
-      <div className="student-topbar-line">{student.regNumber}</div>
-      <div className="student-topbar-line">
-        Semester {student.semester}
-        {student.branch && (
-          <span className="student-topbar-branch">| {student.branch}</span>
-        )}
+      <div className="student-topbar-info">
+        <div className="student-topbar-line">Welcome</div>
+        <div className="student-topbar-line">{student.name}</div>
+        <div className="student-topbar-line">{student.regNumber}</div>
+        <div className="student-topbar-line">
+          Semester {student.semester}
+          {student.branch && (
+            <span className="student-topbar-branch">| {student.branch}</span>
+          )}
+        </div>
+      </div>
+      <div className="student-topbar-image-container">
+        <img
+          className="student-topbar-profile-image"
+          src={student.profileImage ? `data:image/jpeg;base64,${student.profileImage}` : "/default-avatar.png"}
+          alt={student.profileImage ? "Profile" : "No profile image"}
+        />
       </div>
     </div>
   );

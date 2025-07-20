@@ -43,4 +43,7 @@ public class Student {
     private String fatherName;
     private String motherName;
     private String parentMobile;
+
+    @Column(name = "profile_image")
+    private byte[] profileImage; // nullable, stores JPEG/PNG image <= 50KB
 }

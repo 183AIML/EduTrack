@@ -80,6 +80,40 @@ public class RegistrationController {
         student.setFatherName((String) payload.get("fatherName"));
         student.setMotherName((String) payload.get("motherName"));
         student.setParentMobile((String) payload.get("parentMobile"));
+        // Handle profile image (base64 string to byte[]), JPEG/PNG only, max 50KB
+        Object profileImageObj = payload.get("profileImage");
+        System.out.println("[DEBUG] profileImageObj type: "
+                + (profileImageObj == null ? "null" : profileImageObj.getClass().getName()));
+        System.out.println("[DEBUG] profileImageObj value: " + profileImageObj);
+        // Defensive: Only process if it's a non-empty String, else set null
+        if (profileImageObj != null && profileImageObj instanceof String) {
+            String base64 = (String) profileImageObj;
+            if (!base64.isEmpty()) {
+                try {
+                    byte[] imageBytes = java.util.Base64.getDecoder().decode(base64);
+                    // Check size <= 50KB
+                    if (imageBytes.length > 51200) {
+                        return ResponseEntity.badRequest().body("Profile image must be 50KB or less.");
+                    }
+                    // Check JPEG/PNG magic numbers
+                    boolean isJpeg = imageBytes.length > 3 && imageBytes[0] == (byte) 0xFF
+                            && imageBytes[1] == (byte) 0xD8 && imageBytes[2] == (byte) 0xFF;
+                    boolean isPng = imageBytes.length > 7 && imageBytes[0] == (byte) 0x89
+                            && imageBytes[1] == (byte) 0x50 && imageBytes[2] == (byte) 0x4E
+                            && imageBytes[3] == (byte) 0x47;
+                    if (!isJpeg && !isPng) {
+                        return ResponseEntity.badRequest().body("Profile image must be JPEG or PNG.");
+                    }
+                    student.setProfileImage(imageBytes);
+                } catch (Exception e) {
+                    student.setProfileImage(null);
+                }
+            } else {
+                student.setProfileImage(null);
+            }
+        } else {
+            student.setProfileImage(null);
+        }
         studentService.registerStudent(student);
         return ResponseEntity.ok("Student registration successful");
     }

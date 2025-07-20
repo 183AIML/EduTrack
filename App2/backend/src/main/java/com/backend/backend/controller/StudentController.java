@@ -63,6 +63,7 @@ public class StudentController {
                     map.put("fatherName", student.getFatherName());
                     map.put("motherName", student.getMotherName());
                     map.put("parentMobile", student.getParentMobile());
+                    map.put("profileImage", student.getProfileImage() != null ? java.util.Base64.getEncoder().encodeToString(student.getProfileImage()) : null);
                     return ResponseEntity.ok(map);
                 })
                 .orElse(ResponseEntity.status(401).body(Map.of("error", "User not found")));

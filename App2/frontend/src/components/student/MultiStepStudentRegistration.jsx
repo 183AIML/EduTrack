@@ -42,6 +42,7 @@ const initialFormData = {
   fatherName: "",
   motherName: "",
   parentMobile: "",
+  profileImage: null,
 };
 
 const stepFields = [
@@ -172,7 +173,7 @@ const MultiStepStudentRegistration = ({ userInfo }) => {
     }, 200);
   };
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, files } = e.target;
     if (name === "year") {
       setFormData((prev) => ({ ...prev, year: value, semester: "" }));
       setFieldErrors((prev) => ({
@@ -180,6 +181,37 @@ const MultiStepStudentRegistration = ({ userInfo }) => {
         year: undefined,
         semester: undefined,
       }));
+    } else if (name === "profileImage") {
+      // File input: validate and convert to base64
+      const file = files && files[0];
+      if (!file) {
+        setFormData((prev) => ({ ...prev, profileImage: null }));
+        setFieldErrors((prev) => ({ ...prev, profileImage: undefined }));
+        return;
+      }
+      if (!["image/jpeg", "image/png"].includes(file.type)) {
+        setFormData((prev) => ({ ...prev, profileImage: null }));
+        setFieldErrors((prev) => ({
+          ...prev,
+          profileImage: "Only JPEG/PNG allowed.",
+        }));
+        return;
+      }
+      if (file.size > 51200) {
+        setFormData((prev) => ({ ...prev, profileImage: null }));
+        setFieldErrors((prev) => ({
+          ...prev,
+          profileImage: "Image must be 50KB or less.",
+        }));
+        return;
+      }
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64 = reader.result.split(",")[1];
+        setFormData((prev) => ({ ...prev, profileImage: base64 }));
+        setFieldErrors((prev) => ({ ...prev, profileImage: undefined }));
+      };
+      reader.readAsDataURL(file);
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
       setFieldErrors((prev) => ({ ...prev, [name]: undefined }));
@@ -194,11 +226,21 @@ const MultiStepStudentRegistration = ({ userInfo }) => {
     try {
       // Register user first
       const { email, password, role, ...rest } = formData;
+      if (!email || !password || !role) {
+        setError("Email, password, and role are required for registration.");
+        setLoading(false);
+        return;
+      }
+      console.log("Registering user with:", { email, password, role });
       const userRes = await import("../../services/api").then((api) =>
         api.registerUser({ email, password, role })
       );
       // Register student with userId
-      await registerStudent({ ...rest, userId: userRes.userId });
+      await registerStudent({
+        ...rest,
+        userId: userRes.userId,
+        profileImage: formData.profileImage,
+      });
       sessionStorage.removeItem("register_email");
       sessionStorage.removeItem("register_password");
       sessionStorage.removeItem("register_role");

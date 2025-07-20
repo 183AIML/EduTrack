@@ -37,6 +37,7 @@ CREATE TABLE students (
     father_name VARCHAR(100),
     mother_name VARCHAR(100),
     parent_mobile VARCHAR(20),
+    profile_image BYTEA,
     CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES users(id)
 );
 
